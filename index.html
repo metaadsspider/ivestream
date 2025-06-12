@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Live Cricket Streaming</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      padding: 20px;
+      color: #00ffcc;
+    }
+
+    video {
+      width: 90%;
+      max-width: 960px;
+      border: 3px solid #00ffcc;
+      border-radius: 10px;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🏏 Live Cricket Match</h1>
+
+  <video id="video" controls autoplay></video>
+
+  <script>
+    const video = document.getElementById('video');
+    const videoSrc = 'https://dai.fancode.com/linear/hls/pb/event/P2ol7uGBRma1l5IUZ8238A/stream/db6b2b72-f5ef-4441-9581-e31f882012d3:TPE2/variant/d4594d5727766003a2272717a2701b5b/bandwidth/3289416.m3u8'; 
+
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        video.play();
+      });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      // For Safari
+      video.src = videoSrc;
+      video.addEventListener('loadedmetadata', function () {
+        video.play();
+      });
+    } else {
+      alert("Your browser doesn't support HLS streaming.");
+    }
+  </script>
+
+</body>
+</html>
