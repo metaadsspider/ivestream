@@ -2,32 +2,50 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>FanCode Stream Test</title>
+  <title>Live Stream Player</title>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-</head>
-<body style="background: black; display: flex; justify-content: center; align-items: center; height: 100vh;">
-  <video id="video" controls autoplay width="800" style="border: 2px solid white;"></video>
-
-  <script>
-    const video = document.getElementById('video');
-    const streamURL = 'https://dai.fancode.com/linear/hls/pb/event/CiCy7CgGQcyEbstxgCCMXw/stream/5f3eb652-edac-471b-840a-5db7aef26ace:TPE/variant/cc3fdaf7af4cbc104c616af1ca96fc03/bandwidth/3322120.m3u8';
-
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(streamURL);
-      hls.attachMedia(video);
-      hls.on(Hls.Events.ERROR, function (event, data) {
-        console.error("HLS.js error:", data);
-        alert("Stream failed to load. Likely due to CORS restrictions.");
-      });
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = streamURL;
-      video.addEventListener('loadedmetadata', function () {
-        video.play();
-      });
-    } else {
-      alert('Your browser does not support HLS playback.');
+  <style>
+    body {
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
-  </script>
+    video {
+      width: 90%;
+      max-width: 800px;
+      border: 3px solid white;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<video id="video" controls autoplay></video>
+
+<script>
+  const video = document.getElementById('video');
+
+  // ✅ Replace this with your proxied FanCode stream (Step 2)
+  const streamURL = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+
+  if (Hls.isSupported()) {
+    const hls = new Hls();
+    hls.loadSource(streamURL);
+    hls.attachMedia(video);
+    hls.on(Hls.Events.ERROR, (event, data) => {
+      console.error('HLS error:', data);
+      alert('Stream failed to load. Likely due to CORS or network restrictions.');
+    });
+  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = streamURL;
+    video.addEventListener('loadedmetadata', () => video.play());
+  } else {
+    alert('Your browser does not support HLS playback.');
+  }
+</script>
+
 </body>
 </html>
