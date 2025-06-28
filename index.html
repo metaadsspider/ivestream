@@ -1,55 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HLS Video Player</title>
-  <style>
-    body {
-      margin: 0;
-      background: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    video {
-      width: 80%;
-      max-width: 960px;
-      border: 2px solid #fff;
-    }
-  </style>
-</head>
-<body>
-
-  <video id="videoPlayer" controls autoplay></video>
-
+  <meta charset="UTF-8">
+  <title>FanCode Stream Test</title>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body style="background: black; display: flex; justify-content: center; align-items: center; height: 100vh;">
+  <video id="video" controls autoplay width="800" style="border: 2px solid white;"></video>
+
   <script>
-    const video = document.getElementById('videoPlayer');
-    const videoSrc = "https://dai.fancode.com/linear/hls/pb/event/CiCy7CgGQcyEbstxgCCMXw/stream/5f3eb652-edac-471b-840a-5db7aef26ace:TPE/variant/cc3fdaf7af4cbc104c616af1ca96fc03/bandwidth/3322120.m3u8";
+    const video = document.getElementById('video');
+    const streamURL = 'https://dai.fancode.com/linear/hls/pb/event/CiCy7CgGQcyEbstxgCCMXw/stream/5f3eb652-edac-471b-840a-5db7aef26ace:TPE/variant/cc3fdaf7af4cbc104c616af1ca96fc03/bandwidth/3322120.m3u8';
 
     if (Hls.isSupported()) {
       const hls = new Hls();
-      hls.loadSource(videoSrc);
+      hls.loadSource(streamURL);
       hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        video.play();
+      hls.on(Hls.Events.ERROR, function (event, data) {
+        console.error("HLS.js error:", data);
+        alert("Stream failed to load. Likely due to CORS restrictions.");
       });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = videoSrc;
-      video.addEventListener('loadedmetadata', () => {
+      video.src = streamURL;
+      video.addEventListener('loadedmetadata', function () {
         video.play();
       });
     } else {
-      alert("Your browser does not support HLS playback.");
+      alert('Your browser does not support HLS playback.');
     }
-
-    video.addEventListener('error', (e) => {
-      console.error("Playback error:", e);
-      alert("Failed to play the video. It may be blocked, expired, or not allowed in your region.");
-    });
   </script>
-
 </body>
 </html>
