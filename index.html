@@ -1,51 +1,56 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Live Stream Player</title>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <title>Live Stream - Real Time</title>
   <style>
     body {
-      background: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
+      background-color: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
     }
+
     video {
       width: 90%;
       max-width: 800px;
-      border: 3px solid white;
+      height: auto;
+      border: 3px solid #00f7ff;
       border-radius: 10px;
+      background: #000;
     }
   </style>
 </head>
 <body>
 
-<video id="video" controls autoplay></video>
+  <h2>🔥 Real-Time Live Match</h2>
+  <video id="video" controls autoplay></video>
 
-<script>
-  const video = document.getElementById('video');
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    const video = document.getElementById('video');
+    const streamUrl = "https://in-mc-fdlive.fancode.com/mumbai/130383_english_hls_55067adfreeta-di_h264/index.m3u8";
 
-  // ✅ Replace this with your proxied FanCode stream (Step 2)
-  const streamURL = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
-
-  if (Hls.isSupported()) {
-    const hls = new Hls();
-    hls.loadSource(streamURL);
-    hls.attachMedia(video);
-    hls.on(Hls.Events.ERROR, (event, data) => {
-      console.error('HLS error:', data);
-      alert('Stream failed to load. Likely due to CORS or network restrictions.');
-    });
-  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = streamURL;
-    video.addEventListener('loadedmetadata', () => video.play());
-  } else {
-    alert('Your browser does not support HLS playback.');
-  }
-</script>
+    if (Hls.isSupported()) {
+      const hls = new Hls({
+        liveSyncDuration: 3,
+        liveMaxLatencyDuration: 6,
+        maxLiveSyncPlaybackRate: 1.5
+      });
+      hls.loadSource(streamUrl);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        video.play();
+      });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = streamUrl;
+      video.addEventListener('loadedmetadata', () => {
+        video.play();
+      });
+    }
+  </script>
 
 </body>
 </html>
