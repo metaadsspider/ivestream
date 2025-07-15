@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,36 +19,107 @@
       border: 3px solid #00f7ff;
       border-radius: 10px;
       background: #000;
+      margin-bottom: 30px;
+    }
+
+    .stream-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .stream-block {
+      background-color: #222;
+      padding: 10px;
+      border: 2px solid #00f7ff;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 180px;
+      transition: transform 0.2s;
+    }
+
+    .stream-block:hover {
+      transform: scale(1.05);
+      background-color: #333;
+    }
+
+    .stream-title {
+      margin-top: 8px;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
 
-  <h2>🔥 Real-Time Live Match</h2>
+  <h2>🔥 WELCOME TO LIVE </h2>
   <video id="video" controls autoplay></video>
+
+  <div class="stream-grid">
+    <!-- Example Stream Blocks (Replace URLs and Titles as needed) -->
+    <div class="stream-block" onclick="switchStream('https://in-mc-fdlive.fancode.com/mumbai/130525_english_hls_25052adfreeta-di_h264/index.m3u8')">
+      <div class="stream-title">MLS - W Vs ASM - W </div>
+    </div>
+    <div class="stream-block" onclick="switchStream('https://in-mc-fdlive.fancode.com/mumbai/130114_english_hls_12627adfreeta-di_h264/index.m3u8')">
+      <div class="stream-title">NYC VS CCC</div>
+    </div>
+    <div class="stream-block" onclick="switchStream('https://amg01269-amg01269c1-willowtv-us-5479.playouts.now.amagi.tv/playlist/amg01269-willowtvfast-willowplus-willowtvus/cb57351a6573608884cb3b6fcef44382847b3dcb0e6c886470af4a9765d97800dbe8ae84ae5b910c4c9e1fc061017d360439cd1dd56c49c1da63b820743c4b21fdcde00080dd0d0cb1df11292ca36265299a7369cc350f7bd2ec5a2f803ebe764c53cb017c593f88f258ae7e4cc59e0a957f39e8fc8b307b24455a9c5a43e6a64cb7acb05911dc3af2e5014dc02e16fa83439fd401b282870e8312d374f9119d94a28dd241808c88599a03eb307b1a483ddcc558b7ff7884eeb35a10b256176f3a70c897bad86719b4787370d9d6e5fa20a562a4ec22846e25be72f025e2039a64b81db4bb24caceb7d256335acea50b3b4dca86a79aeb4750d707abf885b7167f96e6047935aa07b9727156fa9acc0494fc069fb251e6de084d62abfb219c99a2919dd3e72bcc7fa0ad979c33563c006e63d607eef00ece3bd10aeda45029485954bec01a8b91ce497e75468a8c51c35d0faf949c8ad30234dd5f084ae772cd485f15a6466f73eb39fc942853852f1c802629e95d348d309fd24da4fda88f6a3cb1ced57dfc60e1a60fdce270ca075d0958c798464a56736dc2e7700c3360b1238eb79bcf592732f49db9962dc2ec664976286ea2c7a517b29cc5251c18c521570a163522e6c852f4bd7a2f253bdb11c3a97319edb8b9f987d559794f6e9ac1bfc3f5be08ac1e1ca1aed14347175c6ab32011237c99d3e73ad968192c3935847ee8e3e4447089c0b5b0896a498cfff51d0a720f3176d7ff07444676666106929e521a3f889c30b681c350c0eec2470bd57ceb361990d4d37bebadaff30f5ec0e4074227a0da29932776870f827fc19251c8a059032b394263cb9a1baa0cee91c9916bd207857b2e52a638b795e8b6964153e49a457a732a5d05705f73635deb829b344e2ba2ec67d55ce0ea47a00d016068098dd4722bec82401592317177b6e09adbdfad2d248a3fa43b991a40cc312a21eecb34eff9c2d0f29560590599fbeb7bb2af8c8edbc588415a0e7f3b8fce4f5f14897fa9946601ccc6ce4d2aed9311734fab2dd503c3598d31fa636e41/199/1920x1080_5859480/index.m3u8')">
+      <div class="stream-title">Match 3</div>
+    </div>
+    <div class="stream-block" onclick="switchStream('https://801ebce7bcdd44f3afaa5a486d790a9f.mediatailor.us-east-1.amazonaws.com/v1/manifest/85b2e189604a6043ef957e7a3e6ed3bf9b11c843/USCA_DAI_STRM1/5bc064cb-7aa3-4950-8f15-785e955b72ca/3.m3u8')">
+      <div class="stream-title">Match 4</div>
+    </div>
+    <div class="stream-block" onclick="switchStream('https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8')">
+      <div class="stream-title">Match 5</div>
+    </div>
+    <div class="stream-block" onclick="switchStream('https://playertest.longtailvideo.com/adaptive/captions/playlist.m3u8')">
+      <div class="stream-title">Match 6</div>
+    </div>
+    <div class="stream-block" onclick="switchStream('https://live-d-02-icc-ne.akamaized.net/variant/v1blackout/vcg-01-d/DASH_DASH/Live/channel(vcg-01-ch-hd-02)/hdntl=exp=1752256927~acl=%2fvariant%2fv1blackout%2fvcg-01-d%2f*~data=hdntl~hmac=0ee6b536c4b06f3fe29d8e716cfee636908516af4a5bfef9b9f04113d82d3087/manifest.mpd?vcfilter=be3c7a67-a5cd-4721-a180-4441ea77236b&sessid=be3c7a67-a5cd-4721-a180-4441ea77236b-d')">
+      <div class="stream-title">Match 7</div>
+    </div>
+    <div class="stream-block" onclick="switchStream('https://in-mc-flive.fancode.com/mumbai/130411_english_hls_28368ta-di_h264/index.m3u8?hdnea=exp=1752225014~acl=/mumbai/130411_english_hls_28368ta-di_h264/*~id=273091139_625c71ab-7a8c-4b~data=273091139_free_420~hmac=8c5d7021f23691c3a43c3d125bd8d28f1d87124f83349dd5cbb6f33a68bf8701&deviceId=undefined&advertiserId=undefined&ft_type=c1')">
+      <div class="stream-title">Match 8</div>
+    </div>
+    <div class="stream-block" onclick="switchStream('https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8')">
+      <div class="stream-title">Match 9</div>
+    </div>
+    <div class="stream-block" onclick="switchStream('https://live-hls-web-aje.getaj.net/AJE/index.m3u8')">
+      <div class="stream-title">Match 10</div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
+    let hls;
     const video = document.getElementById('video');
-    const streamUrl = "https://in-mc-fdlive.fancode.com/mumbai/130114_english_hls_12627adfreeta-di_h264/index.m3u8";
 
-    if (Hls.isSupported()) {
-      const hls = new Hls({
-        liveSyncDuration: 3,
-        liveMaxLatencyDuration: 6,
-        maxLiveSyncPlaybackRate: 1.5
-      });
-      hls.loadSource(streamUrl);
-      hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        video.play();
-      });
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = streamUrl;
-      video.addEventListener('loadedmetadata', () => {
-        video.play();
-      });
+    function switchStream(streamUrl) {
+      if (hls) {
+        hls.destroy();
+      }
+
+      if (Hls.isSupported()) {
+        hls = new Hls({
+          liveSyncDuration: 3,
+          liveMaxLatencyDuration: 6,
+          maxLiveSyncPlaybackRate: 1.5
+        });
+        hls.loadSource(streamUrl);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+          video.play();
+        });
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = streamUrl;
+        video.addEventListener('loadedmetadata', function () {
+          video.play();
+        });
+      }
     }
+
+    // Load default stream
+    switchStream('https://in-mc-fdlive.fancode.com/mumbai/130383_english_hls_55067adfreeta-di_h264/index.m3u8');
   </script>
 
 </body>
